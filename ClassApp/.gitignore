@@ -1,0 +1,4 @@
+.vscode
+**/Week 3/node_modules
+**/Week 3/package-lock.json
+.env
