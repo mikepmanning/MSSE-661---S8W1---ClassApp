@@ -1,0 +1,16 @@
+{
+  "name": "week3",
+  "version": "1.0.0",
+  "description": "Serving our website to a browser and extending our website's capabilities with API",
+  "license": "ISC",
+  "author": "Michael Manning",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \\\"Error: No test specified\\\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
