@@ -6,9 +6,18 @@ const doLogin = function(e) {
     login({
         username: username,
         password: password
-    }).then(function(res) {
+    }).then(function(res) {  
+        const token = res.headers.get('auth-token');
+        if (token != null) {
+            localStorage.setItem('access_token', token);
+            localStorage.setItem('isAuth', true);
+        }
         window.location.href = 'home.html';
-    })
+    }).catch(function(error) { 
+        console.error("Login failed:", error);
+        const errorMessage = document.getElementById('loginError');
+        errorMessage.innerText = error.message;
+    });
 }
 
 const doRegister = function(e) {
@@ -36,4 +45,6 @@ const doRegister = function(e) {
 
 const doLogout = function(e) {
     e.preventDefault;
+    console.log("Attempting to logout");
+    logout();
 }
