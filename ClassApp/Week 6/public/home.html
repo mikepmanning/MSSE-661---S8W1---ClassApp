@@ -19,9 +19,17 @@
             </header>
 
             <div class="content">
-                <div id="tasks">
-                    <div>Loading...</div>
-                </div>>
+
+                <div id="tasksContainer">
+                    <div id="createButtonDiv">
+                        <button onclick="showCreateModal()">Create New Task</button>
+                    </div>
+
+
+                    <div id="tasks">
+                        <div>Loading...</div>
+                    </div>
+                </div>
             </div>
 
             <footer>
@@ -36,6 +44,30 @@
                 </div>
             </footer>
         </div>
+
+        <div class="modal" id="updateTaskModal" style="display: none;">
+            <div class="modal-content">
+                <header>
+                    <div id="modalTitle">Update Task</div>
+                    <span class="close-button" onclick="hideModal()">&times;</span> 
+                </header>
+              <input type="hidden" id="taskIdInput">
+
+              <label for="taskNameInput" class="input-label">Name:</label>
+              <input type="text" id="taskNameInput">
+
+
+              <label for="taskStatusSelect" class="input-label">Status:</label>
+              <select id="taskStatusSelect">
+                <option value="pending">Pending</option>
+                <option value="completed">Completed</option>
+              </select>
+              <footer>
+                <button id="modalSubmitButton" onclick="updateTaskFromModal()">Submit</button>
+                <button onclick="hideModal()">Cancel</button>
+              </footer>
+            </div>
+          </div>
     </body>
 
     <script src="./js/api.config.js"></script>

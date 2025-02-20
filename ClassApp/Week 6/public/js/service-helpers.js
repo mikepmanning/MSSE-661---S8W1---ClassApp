@@ -37,15 +37,50 @@ const _post = async (url, data) => {
     return res;
 }
 
-const _put = async (url, data) => {
+const _post_with_token = async (url, data) => {
     const res = await fetch(url, {
-        method: 'PUT',
+        method: 'POST',
+        headers: {
+            Authorization: token,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+
+    if (!res.ok) {
+        const errorData = await res.json(); 
+        throw new Error(errorData.message || `HTTP Error: ${res.status}`); 
+    }
+
+    return res;
+}
+
+const _put = async (url, data) => {
+    try {
+        const res = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                Authorization: token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        return res;
+    } catch (error) {
+        console.error("Error in _put:", error);
+        throw error;
+      }
+}
+
+const _delete = async(url) => {
+    const res = await fetch(url, {
+        method: 'DELETE',
         headers: {
             Authorization: token,
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
-    return res.json();
+        }
+    })
+
+    return res;
 }
 

@@ -61,11 +61,29 @@
             const date = new Date(task.created_date);
             dateSpan.innerText = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
 
+              // Add update button
+              const updateButton = document.createElement('button');
+              updateButton.className = 'update-button';
+              updateButton.innerText = 'Update';
+              updateButton.addEventListener('click', () => {
+                  showUpdateModal(task);
+              });
+  
+              // Add delete button
+              const deleteButton = document.createElement('button');
+              deleteButton.className = 'delete-button';
+              deleteButton.innerText = 'Delete';
+              deleteButton.addEventListener('click', () => {
+                  deleteTask(task._id);
+              });
+
             //add list item
             block.appendChild(checkboxSpan);
             block.appendChild(nameSpan);
             block.appendChild(statusSpan);
             block.appendChild(dateSpan);
+            block.appendChild(updateButton); 
+            block.appendChild(deleteButton);
 
             li.appendChild(block);
             ul.appendChild(li);
