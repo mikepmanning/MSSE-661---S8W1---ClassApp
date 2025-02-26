@@ -2,7 +2,6 @@ const access_token = (typeof localStorage !== 'undefined' && localStorage.length
 const token = `Bearer ${access_token}`;
 
 const _get = async (url) => {
-    console.log(token);
     const res = await fetch(url, {
         method: 'GET',
         headers: {
