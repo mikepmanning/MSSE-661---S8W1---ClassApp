@@ -50,7 +50,7 @@ class ToDo {
         deleteButton.className = 'delete-button';
         deleteButton.innerText = 'Delete';
         deleteButton.addEventListener('click', () => {
-            this.taskService.deleteTask(task._id);
+            todo._deleteTask(task._id);
         });
 
         listGroupItem.append(nameSpan);
@@ -157,20 +157,24 @@ class ToDo {
       
         hideModal();
     }
+
+    async _updateTask(taskId, name, status) {
+        await this.taskService.updateTask(taskId, name, status);
+    }
     
-      showCreateModal() {
+    showCreateModal() {
         const modal = document.getElementById('updateTaskModal');
         const nameInput = document.getElementById('taskNameInput');
         const statusSelect = document.getElementById('taskStatusSelect');
         const taskIdInput = document.getElementById('taskIdInput'); 
         const submitButton = document.getElementById("modalSubmitButton");
         const modalTitle = document.getElementById('modalTitle');
-      
+        
         modalTitle.innerText = 'Create Task';
         taskIdInput.value = ''; 
         nameInput.value = '';
         statusSelect.value = 'pending';
-    
+
         submitButton.onclick = () => {
             try {
                 this.createTaskFromModal();
@@ -178,20 +182,32 @@ class ToDo {
                 console.error("Error in createTaskFromModal:", error);
             }
         }
-      
+    
         modal.style.display = 'block';
     }
     
-    async createTaskFromModal() {
+    createTaskFromModal() {
         const nameInput = document.getElementById('taskNameInput');
         const statusSelect = document.getElementById('taskStatusSelect');
         
         const updatedName = nameInput.value;
         const updatedStatus = statusSelect.value;
       
-        await this.taskService.createTask(updatedName, updatedStatus);
+        _addTask(updatedName, updatedStatus);
       
         todo.hideModal();
+    }
+
+    async _addTask(name, status) {
+        const task = await this.taskService.createTask(name, status);
+        this.tasks.push(task);
+    }
+
+    async _deleteTask(taskId) {
+        await this.taskService.deleteTask(taskId);
+        this.tasks = this.tasks.filter(task => {
+            return typeof task !== 'undefined' && task._id !== taskId;
+        });
     }
 
 

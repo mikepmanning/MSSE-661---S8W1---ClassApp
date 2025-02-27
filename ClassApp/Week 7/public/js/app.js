@@ -49,6 +49,3 @@ const doLogout = function(e) {
     authService.logout();
 }
 
-if (typeof todo !== 'undefined') {
-    todo.init();
-}
